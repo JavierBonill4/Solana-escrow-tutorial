@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Add a five-minute time lock before escrow cancellation on Solana. Eight checkpoints with hints, and the fork-and-pull-request workflow." />
+<meta name="description" content="Add a five-minute time lock before escrow cancellation on Solana. Eight checkpoints with hints and the fork-and-pull-request workflow." />
 <title>Escrow Time Lock</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -507,41 +507,9 @@ summary:hover { background: var(--surface-sunk); }
   color: var(--purple-deep);
   border: 1px solid var(--line-strong);
 }
-.tag.sol { background: var(--green-wash); color: var(--green); border-color: var(--green); }
 .d-body { padding: 0 1.1rem 1.1rem; }
 .d-body > * + * { margin-top: .85rem; }
 .d-body p, .d-body ul, .d-body ol { font-size: .96rem; }
-
-/* Gated solutions -------------------------------------------------- */
-.sol-gate.is-locked > summary { color: var(--dim); }
-.sol-gate.is-locked > summary .tag.sol {
-  background: var(--surface-sunk);
-  color: var(--dim);
-  border-color: var(--line);
-}
-.sol-gate.is-locked > summary::after { content: "\1F512"; font-family: inherit; font-size: .9rem; }
-.sol-gate.is-locked[open] > summary::after { content: "\1F512"; }
-
-.gate {
-  border: 1px dashed var(--line-strong);
-  background: var(--surface-sunk);
-  border-radius: .65rem;
-  padding: .95rem 1.1rem;
-  font-size: .94rem;
-  color: var(--ink-soft);
-}
-.gate b {
-  display: block;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: .69rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--purple-deep);
-  margin-bottom: .45rem;
-}
-.gate ul { padding-left: 1.1rem; margin-top: .55rem; gap: .3rem; display: flex; flex-direction: column; }
-.gate a { font-weight: 600; }
 
 /* Spec table ------------------------------------------------------- */
 .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: .75rem; background: var(--surface); }
@@ -620,10 +588,8 @@ td.num { font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular
       <li><a href="#cp3"><span class="node">3</span><span>Stamp it in make</span></a></li>
       <li><a href="#cp4"><span class="node">4</span><span>A real error</span></a></li>
       <li><a href="#cp5"><span class="node">5</span><span>Hold the door shut</span></a></li>
-      <!-- <li><a href="#cp6"><span class="node">6</span><span>A bug that isn't yours</span></a></li> -->
-      <li><a href="#cp7"><span class="node">6</span><span>Travel in time</span></a></li>
-      <li><a href="#cp8"><span class="node">7</span><span>Open the PR</span></a></li>
-      <!-- <li><a href="#solutions"><span class="node">S</span><span>Solutions</span></a></li> -->
+      <li><a href="#cp6"><span class="node">6</span><span>Travel in time</span></a></li>
+      <li><a href="#cp7"><span class="node">7</span><span>Open the PR</span></a></li>
       <li><a href="#trouble"><span class="node">?</span><span>Troubleshooting</span></a></li>
     </ol>
     <div class="rail-foot">
@@ -687,9 +653,8 @@ td.num { font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular
       </div>
 
       <p style="color:var(--dim);font-size:.95rem">
-        Every step has hints you can open when you want them, and the answers unlock once
-        you have worked through the steps before them. This repo also has a real README —
-        read it before checkpoint 1; it explains every account in the program.
+        Every step has hints you can open when you want them. This repo also has a real
+        README — read it before checkpoint 1; it explains every account in the program.
       </p>
     </section>
 
@@ -711,7 +676,7 @@ td.num { font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular
 
       <h4>1 · Fork on GitHub</h4>
       <p>
-        Open <code>https://github.com/decentra1ized/solana-fall-t22-escrow</code> and click
+        Open <code>github.com/ASCorreia/solana-summer-escrow</code> and click
         <strong>Fork</strong> (top right). You now own
         <code>github.com/&lt;you&gt;/solana-summer-escrow</code>.
       </p>
@@ -721,11 +686,11 @@ td.num { font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular
 cd solana-summer-escrow</code></pre>
 
       <h4>3 · Add the original as <code>upstream</code></h4>
-<pre><code>git remote add upstream https://github.com/decentra1ized/solana-fall-t22-escrow.git
+<pre><code>git remote add upstream https://github.com/ASCorreia/solana-summer-escrow.git
 git remote -v
 
 <span class="c-com"># origin    https://github.com/&lt;you&gt;/solana-summer-escrow.git   (yours — you push here)</span>
-<span class="c-com"># upstream  https://github.com/decentra1ized/solana-fall-t22-escrow.git (theirs — you pull from here)</span></code></pre>
+<span class="c-com"># upstream  https://github.com/ASCorreia/solana-summer-escrow.git (theirs — you pull from here)</span></code></pre>
 
       <div class="note">
         <span class="note-label">The convention</span>
@@ -814,7 +779,7 @@ cargo test</code></pre>
             <tr><td class="num">src/instructions/cancel.rs</td><td>Returns tokens, closes everything</td><td><strong>Yes</strong></td></tr>
             <tr><td class="num">src/error.rs</td><td>One placeholder error</td><td><strong>Yes</strong></td></tr>
             <tr><td class="num">src/constants.rs</td><td>One unused constant</td><td><strong>Yes</strong></td></tr>
-            <tr><td class="num">src/instructions/take.rs</td><td>The swap</td><td>Only in checkpoint 6</td></tr>
+            <tr><td class="num">src/instructions/take.rs</td><td>The swap</td><td>No — read it for context</td></tr>
             <tr><td class="num">src/lib.rs</td><td>Three one-line wrappers</td><td>No — signatures do not change</td></tr>
             <tr><td class="num">tests/test_make.rs</td><td>The only existing test</td><td>Read it; you will copy its setup</td></tr>
           </tbody>
@@ -825,7 +790,7 @@ cargo test</code></pre>
         <span class="note-label">Notice what is missing</span>
         There is no <code>tests/common/mod.rs</code> and no test for <code>cancel</code> at
         all. The mint and token-account helpers live as plain functions at the top of
-        <code>test_make.rs</code>. In checkpoint 7 you will lift them into your own test
+        <code>test_make.rs</code>. In checkpoint 6 you will lift them into your own test
         file — that is normal, and it is worth reading them closely now.
       </div>
 
@@ -1044,7 +1009,7 @@ cargo test</code></pre>
         <div class="d-body">
           <p>
             <code>&gt;=</code> and <code>&gt;</code> differ on exactly one second, and
-            checkpoint 7 asks you to test that second. "Five minutes have passed" includes
+            checkpoint 6 asks you to test that second. "Five minutes have passed" includes
             the moment five minutes have passed, so at exactly <code>created_at + 300</code>
             the cancel must succeed.
           </p>
@@ -1055,73 +1020,9 @@ cargo test</code></pre>
     </section>
 
     <!-- ============ CP 6 ============ -->
-    <!-- <section class="cp" id="cp6">
+    <section class="cp" id="cp6">
       <div class="cp-head">
         <span class="cp-num">06</span>
-        <div class="cp-titles">
-          <span class="cp-eyebrow">Detour</span>
-          <h2>A bug that isn't yours</h2>
-        </div>
-      </div>
-
-      <p>
-        Your time lock is done. When you write the test where cancellation is
-        <em>allowed</em>, it will still fail — and not because of anything you wrote.
-      </p>
-
-      <p>
-        The escrow PDA is derived from three seeds plus a bump:
-      </p>
-<pre><code>[b<span class="c-str">"escrow"</span>, maker, seed.<span class="c-fn">to_le_bytes</span>(), bump]</code></pre>
-      <p>
-        <code>cancel.rs</code>'s token transfer signs with exactly those. But the
-        <code>close_vault</code> function below it signs with only:
-      </p>
-<pre><code>[b<span class="c-str">"escrow"</span>, maker, bump]   <span class="c-com">// seed is missing</span></code></pre>
-
-      <p>
-        Different seeds derive a different address, so the runtime refuses the signature.
-        Over a thousand randomly generated escrows, the seed-less version produced the
-        correct escrow PDA <strong>zero</strong> times — about half the time it is not a
-        valid PDA at all, and the rest of the time it is a valid but unrelated address.
-        Either way the CPI fails.
-      </p>
-
-      <div class="note warn">
-        <span class="note-label">Same bug, twice more, in take.rs</span>
-        <code>take.rs</code> has the seed-less seeds in <strong>two</strong> places — its
-        transfer and its own <code>close_vault</code>. Three occurrences across the repo.
-        Nothing caught them because the only existing test is <code>test_make</code>, and
-        <code>make</code> never signs as the PDA.
-      </div>
-
-      <h4>What to do about it</h4>
-      <p>
-        Fix all three, and mention it in your pull request description. Finding a real bug
-        while doing something else is a completely normal part of contributing, and saying
-        so plainly — "while adding the time lock I found the signer seeds in
-        <code>close_vault</code> omit the seed; fixed in a separate commit" — is exactly how
-        you would raise it on a team.
-      </p>
-      <p>
-        Keep it as its <em>own commit</em>, separate from your feature. A reviewer should be
-        able to look at the bug fix without reading your time lock, and vice versa.
-      </p>
-
-      <div class="note">
-        <span class="note-label">The lesson underneath</span>
-        The bug survived because nothing exercised that code path. Untested code is not
-        code that works — it is code whose behavior nobody has checked. Your tests in the
-        next checkpoint are the first thing in this repo to run <code>cancel</code> at all.
-      </div>
-
-      <label class="done-row"><input type="checkbox" data-cp="6" /> Mark checkpoint 6 complete</label>
-    </section> -->
-
-    <!-- ============ CP 7 ============ -->
-    <section class="cp" id="cp7">
-      <div class="cp-head">
-        <span class="cp-num">07</span>
         <div class="cp-titles">
           <span class="cp-eyebrow">tests</span>
           <h2>Travel in time</h2>
@@ -1230,17 +1131,16 @@ svm.<span class="c-fn">set_sysvar</span>(&amp;clock);</code></pre>
       <div class="note">
         <span class="note-label">Check yourself</span>
         <code>anchor build &amp;&amp; cargo test</code> — <code>test_make</code> still
-        passes, plus your new ones. If the "late enough" test fails with a signer error
-        rather than an assertion, go back to checkpoint 6.
+        passes, plus your new ones.
       </div>
 
-      <label class="done-row"><input type="checkbox" data-cp="7" /> Mark checkpoint 7 complete</label>
+      <label class="done-row"><input type="checkbox" data-cp="6" /> Mark checkpoint 6 complete</label>
     </section>
 
-    <!-- ============ CP 8 ============ -->
-    <section class="cp" id="cp8">
+    <!-- ============ CP 7 ============ -->
+    <section class="cp" id="cp7">
       <div class="cp-head">
-        <span class="cp-num">08</span>
+        <span class="cp-num">07</span>
         <div class="cp-titles">
           <span class="cp-eyebrow">Submit</span>
           <h2>Open the PR</h2>
@@ -1265,21 +1165,17 @@ git diff</code></pre>
         files explicitly instead.
       </div>
 
-      <h4>2 · Three commits, not one</h4>
+      <h4>2 · Two commits, not one</h4>
 <pre><code>git add programs/escrow/src/state programs/escrow/src/instructions/make.rs \
         programs/escrow/src/error.rs programs/escrow/src/constants.rs \
         programs/escrow/src/instructions/cancel.rs
 git commit -m <span class="c-str">"Add five minute time lock before escrow cancellation"</span>
 
-git add programs/escrow/src/instructions/take.rs
-git commit -m <span class="c-str">"Fix close_vault signer seeds missing the escrow seed"</span>
-
 git add programs/escrow/tests
 git commit -m <span class="c-str">"Test cancellation before and after the time lock"</span></code></pre>
       <p>
-        Imperative mood — "Add", not "Added". The feature, the unrelated bug fix, and the
-        tests are three separate ideas, and a reviewer should be able to read them
-        separately.
+        Imperative mood — "Add", not "Added". The feature and the tests are two separate
+        ideas, and a reviewer should be able to read them separately.
       </p>
 
       <h4>3 · Sync before you push</h4>
@@ -1298,7 +1194,7 @@ git rebase upstream/main</code></pre>
         <table>
           <thead><tr><th>Field</th><th>Value</th></tr></thead>
           <tbody>
-            <tr><td>base repository</td><td class="num">decentra1ized/solana-fall-t22-escrow</td></tr>
+            <tr><td>base repository</td><td class="num">ASCorreia/solana-summer-escrow</td></tr>
             <tr><td>base branch</td><td class="num">main</td></tr>
             <tr><td>head repository</td><td class="num">&lt;you&gt;/solana-summer-escrow</td></tr>
             <tr><td>compare branch</td><td class="num">feat/escrow-timelock</td></tr>
@@ -1320,11 +1216,6 @@ A minimum lifetime makes the offer credible.
 - `cancel` rejects with `TimeLockActive` until `created_at + CANCEL_DELAY_SECONDS`
 - delay lives in `constants.rs` and is exported to the IDL
 
-<span class="c-com">## Also (separate commit)</span>
-`close_vault` in both `cancel.rs` and `take.rs` signed with seeds that
-omit the escrow `seed`, so the PDA signature could never validate. This
-was unreachable before because no test exercised those paths.
-
 <span class="c-com">## Testing</span>
 `anchor build && cargo test` — `test_make` still passes, plus new tests
 for cancelling too early, exactly at the boundary, and after the lock.</code></pre>
@@ -1337,231 +1228,8 @@ for cancelling too early, exactly at the boundary, and after the lock.</code></p
         <li>Reply to every comment, even just to say you have done it. Silence reads as disagreement.</li>
       </ul>
 
-      <label class="done-row"><input type="checkbox" data-cp="8" /> Mark checkpoint 8 complete</label>
+      <label class="done-row"><input type="checkbox" data-cp="7" /> Mark checkpoint 7 complete</label>
     </section>
-
-    <!-- ============ SOLUTIONS ============ -->
-    <!-- <section class="cp" id="solutions">
-      <div class="cp-head">
-        <span class="cp-num" style="background:var(--green-wash);border-color:var(--green);color:var(--green)">S</span>
-        <div class="cp-titles">
-          <span class="cp-eyebrow">Reference</span>
-          <h2>Solutions</h2>
-        </div>
-      </div>
-
-      <p>
-        Let the compiler lead first. Most of this challenge is Rust naming the exact thing
-        that is missing, and reading an answer skips the part where you learn to read those
-        messages.
-      </p>
-
-      <details class="sol-gate" data-solves="2">
-        <summary><span class="tag sol">Solution</span> Checkpoint 2 — state/escrow.rs</summary>
-        <div class="d-body">
-          <div class="gate-slot"></div>
-          <template class="sol-content">
-<pre><code><span class="c-attr">#[account]</span>
-<span class="c-attr">#[derive(InitSpace)]</span>
-<span class="c-key">pub struct</span> Escrow {
-    <span class="c-key">pub</span> maker: Pubkey,
-    <span class="c-key">pub</span> mint_a: Pubkey,
-    <span class="c-key">pub</span> mint_b: Pubkey,
-    <span class="c-key">pub</span> amount_a: <span class="c-key">u64</span>,
-    <span class="c-key">pub</span> amount_b: <span class="c-key">u64</span>,
-    <span class="c-key">pub</span> seed: <span class="c-key">u16</span>,
-    <span class="c-key">pub</span> bump: <span class="c-key">u8</span>,
-    <span class="c-key">pub</span> created_at: <span class="c-key">i64</span>,   <span class="c-com">// Unix timestamp when the escrow was created</span>
-}</code></pre>
-        </template>
-        </div>
-      </details>
-
-      <details class="sol-gate" data-solves="3">
-        <summary><span class="tag sol">Solution</span> Checkpoint 3 — make.rs</summary>
-        <div class="d-body">
-          <div class="gate-slot"></div>
-          <template class="sol-content">
-<pre><code>ctx.accounts.escrow.<span class="c-fn">set_inner</span>(Escrow {
-    maker: ctx.accounts.maker.<span class="c-fn">key</span>(),
-    mint_a: ctx.accounts.mint_a.<span class="c-fn">key</span>(),
-    mint_b: ctx.accounts.mint_b.<span class="c-fn">key</span>(),
-    amount_a,
-    amount_b,
-    seed,
-    bump: ctx.bumps.escrow,
-    created_at: Clock::<span class="c-fn">get</span>()?.unix_timestamp,
-});</code></pre>
-          <p>The rest of the handler is unchanged.</p>
-        </template>
-        </div>
-      </details>
-
-      <details class="sol-gate" data-solves="4">
-        <summary><span class="tag sol">Solution</span> Checkpoint 4 — error.rs and constants.rs</summary>
-        <div class="d-body">
-          <div class="gate-slot"></div>
-          <template class="sol-content">
-<pre><code><span class="c-com">// src/error.rs</span>
-<span class="c-attr">#[error_code]</span>
-<span class="c-key">pub enum</span> ErrorCode {
-    <span class="c-attr">#[msg(<span class="c-str">"Custom error message"</span>)]</span>
-    CustomError,
-    <span class="c-attr">#[msg(<span class="c-str">"The escrow cannot be cancelled yet - the time lock has not elapsed"</span>)]</span>
-    TimeLockActive,
-}</code></pre>
-<pre><code><span class="c-com">// src/constants.rs</span>
-<span class="c-attr">#[constant]</span>
-<span class="c-key">pub const</span> CANCEL_DELAY_SECONDS: <span class="c-key">i64</span> = <span class="c-num">300</span>; <span class="c-com">// 5 minutes</span></code></pre>
-        </template>
-        </div>
-      </details>
-
-      <details class="sol-gate" data-solves="5">
-        <summary><span class="tag sol">Solution</span> Checkpoint 5 — cancel.rs</summary>
-        <div class="d-body">
-          <div class="gate-slot"></div>
-          <template class="sol-content">
-<pre><code><span class="c-key">use</span> crate::{error::ErrorCode, Escrow, CANCEL_DELAY_SECONDS};
-
-<span class="c-key">pub fn</span> <span class="c-fn">handler</span>(ctx: Context&lt;Cancel&gt;) -&gt; Result&lt;()&gt; {
-    <span class="c-key">let</span> now = Clock::<span class="c-fn">get</span>()?.unix_timestamp;
-    <span class="c-key">let</span> unlock_at = ctx
-        .accounts
-        .escrow
-        .created_at
-        .<span class="c-fn">checked_add</span>(CANCEL_DELAY_SECONDS)
-        .<span class="c-fn">ok_or</span>(ErrorCode::TimeLockActive)?;
-    <span class="c-fn">require!</span>(now &gt;= unlock_at, ErrorCode::TimeLockActive);
-
-    <span class="c-com">// ... the existing transfer and close_vault, unchanged ...</span>
-}</code></pre>
-          <p>
-            <code>&gt;=</code>, so cancelling at exactly five minutes succeeds.
-          </p>
-        </template>
-        </div>
-      </details>
-
-      <details class="sol-gate" data-solves="6">
-        <summary><span class="tag sol">Solution</span> Checkpoint 6 — the signer seeds</summary>
-        <div class="d-body">
-          <div class="gate-slot"></div>
-          <template class="sol-content">
-          <p>
-            In <code>cancel.rs</code> (once, inside <code>close_vault</code>) and
-            <code>take.rs</code> (twice — the transfer and <code>close_vault</code>), change:
-          </p>
-<pre><code><span class="c-key">let</span> seeds = &amp;[
-    &amp;b<span class="c-str">"escrow"</span>[..],
-    ctx.accounts.escrow.maker.<span class="c-fn">as_ref</span>(),
-    &amp;[ctx.accounts.escrow.bump]
-];</code></pre>
-          <p>to:</p>
-<pre><code><span class="c-key">let</span> seeds = &amp;[
-    &amp;b<span class="c-str">"escrow"</span>[..],
-    ctx.accounts.escrow.maker.<span class="c-fn">as_ref</span>(),
-    &amp;ctx.accounts.escrow.seed.<span class="c-fn">to_le_bytes</span>(),
-    &amp;[ctx.accounts.escrow.bump]
-];</code></pre>
-          <p>
-            The transfer in <code>cancel.rs</code> already has it right — compare the two
-            and you can see the omission.
-          </p>
-        </template>
-        </div>
-      </details>
-
-      <details class="sol-gate" data-solves="7">
-        <summary><span class="tag sol">Solution</span> Checkpoint 7 — the tests</summary>
-        <div class="d-body">
-          <div class="gate-slot"></div>
-          <template class="sol-content">
-          <p>
-            Copy <code>setup_mint</code>, <code>setup_token_account</code> and the imports
-            from <code>test_make.rs</code> into <code>tests/test_cancel.rs</code>, then:
-          </p>
-<pre><code><span class="c-key">use</span> anchor_lang::prelude::Clock;
-
-<span class="c-key">fn</span> <span class="c-fn">setup_escrow</span>(svm: &amp;<span class="c-key">mut</span> LiteSVM) -&gt; (Keypair, Pubkey, Pubkey, Pubkey, Pubkey) {
-    <span class="c-com">// airdrop, mints, maker ATA, then send `make` exactly as test_make does.</span>
-    <span class="c-com">// return the maker keypair plus the pubkeys the cancel ix needs.</span>
-}
-
-<span class="c-key">fn</span> <span class="c-fn">build_cancel_ix</span>(maker: &amp;Pubkey, escrow: Pubkey, mint_a: Pubkey,
-                    maker_ata_a: Pubkey, vault_a: Pubkey) -&gt; Instruction {
-    Instruction::<span class="c-fn">new_with_bytes</span>(
-        escrow::<span class="c-fn">id</span>(),
-        &amp;escrow::instruction::Cancel {}.<span class="c-fn">data</span>(),
-        escrow::accounts::Cancel {
-            maker: *maker,
-            escrow,
-            mint_a,
-            maker_ata_a,
-            vault_a,
-            token_program: TOKEN_PROGRAM_ID,
-        }
-        .<span class="c-fn">to_account_metas</span>(<span class="c-fn">None</span>),
-    )
-}
-
-<span class="c-attr">#[test]</span>
-<span class="c-key">fn</span> <span class="c-fn">cancel_before_the_time_lock_fails</span>() {
-    <span class="c-key">let</span> <span class="c-key">mut</span> svm = <span class="c-fn">setup_svm</span>();
-    <span class="c-key">let</span> (maker, escrow, mint_a, maker_ata_a, vault_a) = <span class="c-fn">setup_escrow</span>(&amp;<span class="c-key">mut</span> svm);
-
-    <span class="c-com">// No clock movement at all — we are cancelling immediately.</span>
-    <span class="c-key">let</span> res = <span class="c-fn">send</span>(&amp;<span class="c-key">mut</span> svm, &amp;maker,
-        <span class="c-fn">build_cancel_ix</span>(&amp;maker.<span class="c-fn">pubkey</span>(), escrow, mint_a, maker_ata_a, vault_a));
-
-    <span class="c-key">let</span> err = res.<span class="c-fn">unwrap_err</span>();
-    <span class="c-key">let</span> logs = err.meta.logs.<span class="c-fn">join</span>(<span class="c-str">"\n"</span>);
-    <span class="c-fn">assert!</span>(logs.<span class="c-fn">contains</span>(<span class="c-str">"TimeLockActive"</span>),
-        <span class="c-str">"expected the time lock error, got: {logs}"</span>);
-}
-
-<span class="c-attr">#[test]</span>
-<span class="c-key">fn</span> <span class="c-fn">cancel_exactly_at_the_boundary_succeeds</span>() {
-    <span class="c-key">let</span> <span class="c-key">mut</span> svm = <span class="c-fn">setup_svm</span>();
-    <span class="c-key">let</span> (maker, escrow, mint_a, maker_ata_a, vault_a) = <span class="c-fn">setup_escrow</span>(&amp;<span class="c-key">mut</span> svm);
-
-    <span class="c-com">// Exactly 300 seconds. `now >= created_at + 300` must be true.</span>
-    <span class="c-key">let</span> <span class="c-key">mut</span> clock = svm.get_sysvar::&lt;Clock&gt;();
-    clock.unix_timestamp += <span class="c-num">300</span>;
-    svm.<span class="c-fn">set_sysvar</span>(&amp;clock);
-
-    <span class="c-fn">send</span>(&amp;<span class="c-key">mut</span> svm, &amp;maker,
-        <span class="c-fn">build_cancel_ix</span>(&amp;maker.<span class="c-fn">pubkey</span>(), escrow, mint_a, maker_ata_a, vault_a))
-        .<span class="c-fn">expect</span>(<span class="c-str">"cancel at exactly the boundary should succeed"</span>);
-}
-
-<span class="c-attr">#[test]</span>
-<span class="c-key">fn</span> <span class="c-fn">cancel_after_the_time_lock_returns_the_tokens</span>() {
-    <span class="c-key">let</span> <span class="c-key">mut</span> svm = <span class="c-fn">setup_svm</span>();
-    <span class="c-key">let</span> (maker, escrow, mint_a, maker_ata_a, vault_a) = <span class="c-fn">setup_escrow</span>(&amp;<span class="c-key">mut</span> svm);
-
-    <span class="c-key">let</span> <span class="c-key">mut</span> clock = svm.get_sysvar::&lt;Clock&gt;();
-    clock.unix_timestamp += <span class="c-num">301</span>;
-    svm.<span class="c-fn">set_sysvar</span>(&amp;clock);
-
-    <span class="c-fn">send</span>(&amp;<span class="c-key">mut</span> svm, &amp;maker,
-        <span class="c-fn">build_cancel_ix</span>(&amp;maker.<span class="c-fn">pubkey</span>(), escrow, mint_a, maker_ata_a, vault_a))
-        .<span class="c-fn">expect</span>(<span class="c-str">"cancel after the lock should succeed"</span>);
-
-    <span class="c-com">// The maker got their tokens back and the escrow is gone.</span>
-    <span class="c-key">let</span> ata = svm.<span class="c-fn">get_account</span>(&amp;maker_ata_a).<span class="c-fn">unwrap</span>();
-    <span class="c-fn">assert_eq!</span>(TokenAccount::<span class="c-fn">unpack</span>(&amp;ata.data).<span class="c-fn">unwrap</span>().amount, <span class="c-num">1_000_000</span>);
-    <span class="c-fn">assert!</span>(svm.<span class="c-fn">get_account</span>(&amp;escrow).<span class="c-fn">is_none</span>()
-        || svm.<span class="c-fn">get_account</span>(&amp;escrow).<span class="c-fn">unwrap</span>().data.<span class="c-fn">is_empty</span>());
-}</code></pre>
-          <p>
-            The last test is the one that proves the feature end to end: the tokens actually
-            came home.
-          </p>
-        </template>
-        </div>
-      </details>
-    </section> -->
 
     <!-- ============ TROUBLESHOOTING ============ -->
     <section class="cp" id="trouble">
@@ -1589,13 +1257,12 @@ for cancelling too early, exactly at the boundary, and after the lock.</code></p
         <summary><span class="tag">Error</span> Cross-program invocation with unauthorized signer</summary>
         <div class="d-body">
           <p>
-            The signer seeds do not derive the account you are trying to sign for. If this
-            happens in <code>cancel</code> or <code>take</code>, it is the upstream bug from
-            checkpoint 6 — <code>close_vault</code> omits <code>seed.to_le_bytes()</code>.
-          </p>
-          <p>
-            If it is in code you wrote, print both and compare: the seeds you pass must
-            match the account's derivation exactly, in order, including the bump last.
+            The signer seeds do not derive the account you are trying to sign for. Print
+            both and compare: the seeds you pass must match the account's derivation
+            exactly, in order, including the bump last. For the escrow PDA that is
+            <code>[b"escrow", maker, seed.to_le_bytes(), bump]</code> — all four, and
+            leaving one out gives you an unrelated address rather than an error that says
+            so.
           </p>
         </div>
       </details>
@@ -1607,7 +1274,7 @@ for cancelling too early, exactly at the boundary, and after the lock.</code></p
           <ul>
             <li>Did you use <code>warp_to_slot</code>? It does not move <code>unix_timestamp</code>. Use <code>get_sysvar</code> / <code>set_sysvar</code>.</li>
             <li>Did you move the clock <em>before</em> calling <code>make</code>? Then you only changed what got stamped in. Make first, then move.</li>
-            <li>Is the failure a signer error rather than your assertion? Checkpoint 6.</li>
+            <li>Is the failure a signer error rather than your assertion? Then the accounts you built the instruction with do not match the <code>Cancel</code> struct — re-read it and compare field by field.</li>
           </ul>
         </div>
       </details>
@@ -1672,7 +1339,7 @@ for cancelling too early, exactly at the boundary, and after the lock.</code></p
             it in place:
           </p>
 <pre><code>git remote set-url origin https://github.com/&lt;you&gt;/solana-summer-escrow.git
-git remote add upstream https://github.com/decentra1ized/solana-fall-t22-escrow</code></pre>
+git remote add upstream https://github.com/ASCorreia/solana-summer-escrow.git</code></pre>
         </div>
       </details>
     </section>
@@ -1687,8 +1354,8 @@ git remote add upstream https://github.com/decentra1ized/solana-fall-t22-escrow<
 <script>
 (function () {
   "use strict";
-  var KEY = "escrow-challenge-progress-v1";
-  var TOTAL = 9;
+  var KEY = "escrow-challenge-progress-v2";
+  var TOTAL = 8;
 
   function read() {
     try {
@@ -1705,72 +1372,6 @@ git remote add upstream https://github.com/decentra1ized/solana-fall-t22-escrow<
   var tally = document.getElementById("tally");
   var state = read();
 
-  // --- gated solutions -----------------------------------------------------
-  // A solution for checkpoint N unlocks once checkpoints 0..N-1 are all ticked.
-  // You are allowed to read the answer to the step you are stuck on; you are not
-  // allowed to skip ahead and read all of them.
-  var gates = Array.prototype.slice.call(document.querySelectorAll(".sol-gate"));
-
-  var CP_NAMES = {
-    0: "Fork & set up", 1: "Read the escrow", 2: "Remember the time",
-    3: "Stamp it in make", 4: "Hold the door shut",
-    5: "A bug that isn't yours", 6: "Travel in time", 7: "Open the PR"
-  };
-
-  function missingFor(gate) {
-    var solves = Number(gate.dataset.solves);
-    var missing = [];
-    for (var i = 0; i < solves; i++) if (!state[i]) missing.push(i);
-    return missing;
-  }
-
-  function renderGate(gate) {
-    var missing = missingFor(gate);
-    var slot = gate.querySelector(".gate-slot");
-    var tpl = gate.querySelector("template.sol-content");
-    if (!slot) return;
-
-    if (missing.length === 0) {
-      gate.classList.remove("is-locked");
-      if (tpl && !gate.dataset.revealed) {
-        slot.appendChild(tpl.content.cloneNode(true));
-        gate.dataset.revealed = "1";
-      }
-      return;
-    }
-
-    gate.classList.add("is-locked");
-    if (gate.dataset.revealed) {           // re-locked after a box was unticked
-      slot.innerHTML = "";
-      delete gate.dataset.revealed;
-    }
-    gate.open = false;
-
-    var links = missing.map(function (i) {
-      return '<li><a href="#cp' + i + '">Checkpoint ' + i + ' — ' + CP_NAMES[i] + "</a></li>";
-    }).join("");
-
-    slot.innerHTML =
-      '<div class="gate"><b>Finish the earlier checkpoints first</b>' +
-      "Work through the steps before this one, tick them off, and this solution opens. " +
-      "Reading ahead is how you end up with code you cannot debug." +
-      "<ul>" + links + "</ul></div>";
-  }
-
-  function paintGates() { gates.forEach(renderGate); }
-
-  // Clicking a locked summary shows the notice instead of opening the block.
-  gates.forEach(function (gate) {
-    var summary = gate.querySelector("summary");
-    if (!summary) return;
-    summary.addEventListener("click", function (e) {
-      if (missingFor(gate).length === 0) return;
-      e.preventDefault();
-      renderGate(gate);
-      gate.open = true;                    // open it — the notice is what is inside
-    });
-  });
-
   function paint() {
     var done = 0;
     boxes.forEach(function (box) {
@@ -1781,7 +1382,6 @@ git remote add upstream https://github.com/decentra1ized/solana-fall-t22-escrow<
       if (on) done++;
     });
     if (tally) tally.textContent = done + " of " + TOTAL + " done";
-    paintGates();
   }
 
   boxes.forEach(function (box) {
